@@ -10,9 +10,23 @@ namespace ORP_API.Models
     [Table("tb_m_overtime_form_employee")]
     public class OvertimeFormEmployee
     {
-        [Key, Required(ErrorMessage ="Data tidak boleh kosong")]
+        [Key]
         public int Id { get; set; }
         [Required]
-        public string Status { get; set; }
+        public StatusRequest Status { get; set; }
+        [Required(ErrorMessage = "Data tidak boleh kosong"), MaxLength(50, ErrorMessage = "Maksimal 50 Karakter")]
+        public string CustomerName { get; set; }
+        public string NIK { get; set; }
+        [ForeignKey("NIK")]
+        public virtual Employee Employee { get; set; }
+        public int OvertimeFormId { get; set; }
+        [ForeignKey("OvertimeFormId")]
+        public virtual OvertimeForm OvertimeForm { get; set; }
+    }
+    public enum StatusRequest
+    {
+        Waiting,
+        Approve,
+        Reject
     }
 }

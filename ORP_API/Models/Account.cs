@@ -15,6 +15,6 @@ namespace ORP_API.Models
         [Required(ErrorMessage = "Tidak boleh kosong"), DataType(DataType.Password)]
         public string Password { get; set; }
         [Required(ErrorMessage = "Tidak boleh kosong"), MaxLength(20, ErrorMessage ="Maksimal 20 Karakter")]
-        public string Role { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

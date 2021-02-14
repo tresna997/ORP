@@ -10,9 +10,10 @@ namespace ORP_API.Models
     [Table("tb_m_role")]
     public class Role
     {
-        [Key, Required(ErrorMessage = "Tidak boleh kosong")]
+        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Tidak boleh kosong"), MaxLength(20, ErrorMessage = "Maksimal 20 karakter")]
         public string Name { get; set; }
+        public virtual List<Employee> Employees { get; set; } = new List<Employee>();
     }
 }
