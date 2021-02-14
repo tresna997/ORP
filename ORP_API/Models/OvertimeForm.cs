@@ -17,6 +17,7 @@ namespace ORP_API.Models
         [Required(ErrorMessage = "Data tidak boleh kosong"), DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime SubmissionDate { get; set; }
+        public string CustomerName { get; set; }
         [Required(ErrorMessage = "Data tidak boleh kosong"), DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{HH:mm:ss}")]
         public DateTime StartTime { get; set; }
