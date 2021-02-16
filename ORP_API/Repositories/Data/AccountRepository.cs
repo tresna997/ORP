@@ -41,8 +41,7 @@ namespace ORP_API.Repositories.Data
                 Email = registerViewModels.Email,
                 PhoneNumber = registerViewModels.PhoneNumber,
                 RoleId = 4,
-                CustomerId = registerViewModels.CustomerId,
-                Password = Hashing.HashPassword("B0o7c@mp")
+                CustomerId = registerViewModels.CustomerId
             };
             var account = new Account()
             {
@@ -70,11 +69,13 @@ namespace ORP_API.Repositories.Data
             LoginViewModels result = null;
 
             string connectStr = Configuration.GetConnectionString("MyConnection");
-            var v = myContext.Employee.Where(a => a.Email == loginViewModels.Email).FirstOrDefault();
+            var employeeCondition = myContext.Employee.Where(a => a.Email == loginViewModels.Email).FirstOrDefault();
 
-            if (v != null)
+            if (employeeCondition != null)
             {
-                if (Hashing.ValidatePassword(loginViewModels.Password, v.Password))
+                var accountCondition = myContext.Account.Any(a => a.Password == loginViewModels.Password);
+
+                if (Hashing.ValidatePassword(loginViewModels.Password))
                 {
                     using (IDbConnection db = new SqlConnection(connectStr))
                     {
